@@ -229,9 +229,8 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION, // Always
         .EventID             = 1000,
         .EventText           = { "Stop Obervation" },
-        .RPNEquation         = { /* WP2 && WP6 && WP5 && WP20 */
-                                 2, 6, 5, 20,
-                                 LC_RPN_AND,
+        .RPNEquation         = { /* WP2 && WP5 && WP20 */
+                                 2, 5, 20,
                                  LC_RPN_AND,
                                  LC_RPN_AND,
                                  LC_RPN_EQUAL
@@ -249,9 +248,8 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1001,
         .EventText           = { "Stop Observation" },
-        .RPNEquation         = { /* WP2 && WP4 && WP7 && WP21 */
-                                 2, 4, 7, 21,
-                                 LC_RPN_AND,
+        .RPNEquation         = { /* WP2 && WP4 && WP21 */
+                                 2, 4, 21,
                                  LC_RPN_AND,
                                  LC_RPN_AND,
                                  LC_RPN_EQUAL
@@ -323,7 +321,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
     /* #5 This accounts for the worst case where an observation is commanded at 95%, which would take the capacitor down to 20-21%. When it is finished with the observation and 
     charging again, the other capacitor needs to become the active capacitor.  */
     {
-        .DefaultState        = LC_APSTATE_ACTIVE,
+        .DefaultState        = LC_ACTION_NOT_USED,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
@@ -332,8 +330,8 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1005,
         .EventText           = { "Set Capacitor A to Active" },
-        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP16 && WP19*/
-                                 1, 4, 5, 16, 19,
+        .RPNEquation         = { /* WP1 && WP4 && WP7 && WP16 && WP19*/
+                                 1, 4, 7, 16, 19,
                                  LC_RPN_AND,
                                  LC_RPN_AND,
                                  LC_RPN_AND,
@@ -345,7 +343,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
     /* #6 This accounts for the worst case where an observation is commanded at 95%, which would take the capacitor down to 20-21%. When it is finished with the observation and 
     charging again, the other capacitor needs to become the active capacitor.  */
     {
-        .DefaultState        = LC_APSTATE_ACTIVE,
+        .DefaultState        = LC_ACTION_NOT_USED,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
@@ -354,8 +352,8 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1006,
         .EventText           = { "Set Capacitor B to Active" },
-        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP17 && WP18*/
-                                 1, 4, 5, 17, 18,
+        .RPNEquation         = { /* WP1 && WP6 && WP5 && WP17 && WP18*/
+                                 1, 6, 5, 17, 18,
                                  LC_RPN_AND,
                                  LC_RPN_AND,
                                  LC_RPN_AND,
@@ -408,121 +406,130 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #9 (unused) */
+    /* #9 If discharging and an observation is commanded, stop the observatione */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_OBS_STOP_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1009,
+        .EventText           = { "Stop Observation" },
+        .RPNEquation         = { /* WP2 && WP6 && WP7 */
+                                 2, 6, 7,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
 
-    /* #10 (unused) */
+    /* #10 When capacitor B is discharging (either due to an observation or discharge command), select capacitor A as the active capacitor. */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_A_ACTIVE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1010,
+        .EventText           = { "Set Capacitor A to active" },
+        .RPNEquation         = { 
+                                 7,
                                  LC_RPN_EQUAL
                                }
     },
 
-    /* #11 (unused) */
+    /* #11 When capacitor A is discharging (either due to an observation or discharge command), select capacitor B as the active capacitor. */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_B_ACTIVE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1011,
+        .EventText           = { "Set Capacitor B to active" },
+        .RPNEquation         = { /* WP6 */
+                                 6,
                                  LC_RPN_EQUAL
                                }
     },
 
-    /* #12 (unused) */
+    /* #12 When the unit temperature reaches 18C or greater, open louvers to cool the unit */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_THERM_LOUVER_OPEN_CC ,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1012,
+        .EventText           = { "Open Louvers" },
+        .RPNEquation         = { /* WP28 && WP32 && WP34 */
+                                 28, 32, 34,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
 
-    /* #13 (unused) */
+    /* #13 When the unit temperature reaches 12C or lower, close louvers.  */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_THERM_LOUVER_CLOSE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1013,
+        .EventText           = { "Close Louvers" },
+        .RPNEquation         = { /* WP30 && WP32 && WP33 */
+                                 30, 32, 33,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
 
-    /* #14 (unused) */
+    /* #14 When the unit temperatue reaches 12C or greater, turn heater off.  */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_THERM_HTR_OFF_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1014,
+        .EventText           = { "Heater off" },
+        .RPNEquation         = { /* WP30 && WP31 && WP34 */
+                                 30, 31, 34,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
 
-    /* #15 (unused) */
+    /* #15 When the unit temperature reaches 10C or lower, turn heater on.  */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_THERM_HTR_ON_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1015,
+        .EventText           = { "Heater on" },
+        .RPNEquation         = { /* WP29 && WP32 */
+                                 29, 32,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
