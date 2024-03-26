@@ -229,11 +229,11 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION, // Always
         .EventID             = 1000,
         .EventText           = { "Stop Obervation" },
-        .RPNEquation         = { 
-                                 2,
-                                 6,
-                                 5,
-                                 20,
+        .RPNEquation         = { /* WP2 && WP6 && WP5 && WP20 */
+                                 2, 6, 5, 20,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
@@ -249,11 +249,11 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1001,
         .EventText           = { "Stop Observation" },
-        .RPNEquation         = { 
-                                 2,
-                                 4,
-                                 7,
-                                 21,
+        .RPNEquation         = { /* WP2 && WP4 && WP7 && WP21 */
+                                 2, 4, 7, 21,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
@@ -269,11 +269,11 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1002,
         .EventText           = { "Discharge Capacitor A" },
-        .RPNEquation         = { 
-                                 1,
-                                 4,
-                                 5,
-                                 12,
+        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP12*/
+                                 1, 4, 5, 12,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
@@ -289,11 +289,11 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1003,
         .EventText           = { "Discharge Capacitor B" },
-        .RPNEquation         = { 
-                                 1,
-                                 4,
-                                 5,
-                                 13,
+        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP13*/
+                                 1, 4, 5, 13,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
@@ -310,12 +310,12 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1004,
         .EventText           = { "Discharge Capacitor B" },
-        .RPNEquation         = { 
-                                 1,
-                                 4,
-                                 5,
-                                 14,
-                                 15,
+        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP14 && WP15*/
+                                 1, 4, 5, 14, 15,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
@@ -332,12 +332,12 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1005,
         .EventText           = { "Set Capacitor A to Active" },
-        .RPNEquation         = { 
-                                 1,
-                                 4,
-                                 5,
-                                 16,
-                                 19,
+        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP16 && WP19*/
+                                 1, 4, 5, 16, 19,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
@@ -354,12 +354,12 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1006,
         .EventText           = { "Set Capacitor B to Active" },
-        .RPNEquation         = { 
-                                 1,
-                                 4,
-                                 5,
-                                 17,
-                                 18,
+        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP17 && WP18*/
+                                 1, 4, 5, 17, 18,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
@@ -375,13 +375,13 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1007,
         .EventText           = { "Discharge Capacitor A" },
-        .RPNEquation         = { 
-                                 1,
-                                 4,
-                                 5,
-                                 26,
-                                 25,
-                                 23,
+        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP26 && WP25 && WP23*/
+                                 1, 4, 5, 26, 25, 23,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
@@ -397,13 +397,13 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1008,
         .EventText           = { "Discharge Capacitor B" },
-        .RPNEquation         = { 
-                                 1,
-                                 4,
-                                 5,
-                                 27,
-                                 24,
-                                 22,
+        .RPNEquation         = { /* WP1 && WP4 && WP5 && WP27 && WP24 && WP22 */
+                                 1, 4, 5, 27, 24, 22,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
+                                 LC_RPN_AND,
                                  LC_RPN_EQUAL
                                }
     },
