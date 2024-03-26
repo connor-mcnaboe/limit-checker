@@ -219,7 +219,7 @@ static CFE_TBL_FileDef_t CFE_TBL_FileDef __attribute__((__used__)) =
 */
 LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
 {
-    /* #0 (unused) */
+    /* #0 This is the lower limit. If it takes 1 second for the command to execute, and at a rate of 5%/s, i set the lower limit to 10% so as not to go below 5% */
     {   .DefaultState        = LC_APSTATE_ACTIVE,   // Always
         .MaxPassiveEvents    = 0,                   // Always 
         .MaxPassFailEvents   = 0,                   // Always
@@ -238,7 +238,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #1 WHE Discharge Capacitor A */
+    /* #1 This is the lower limit. If it takes 1 second for the command to execute, and at a rate of 5%/s, i set the lower limit to 10% so as not to go below 5% */
     {
         .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
@@ -258,7 +258,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #2 (unused) */
+    /* #2 This is the upper limit and will keep the capacitor from overcharging. */
     {
         .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
@@ -278,7 +278,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #3 (unused) */
+    /* #3 This is the upper limit and will keep the capacitor from overcharging. */
     {
         .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
@@ -298,7 +298,8 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #4 (unused) */
+    /* #4 This is for the initial power on when both capacitors are charging at the same rate. If no observation is commanded before they reach 67%, then at 67% capacitor B 
+    will be discharged to avoid a scenario where we have two capacitors above 70%, which could lead to one of them overcharging if an observation was commanded.  */
     {
         .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
@@ -319,7 +320,8 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #5 (unused) */
+    /* #5 This accounts for the worst case where an observation is commanded at 95%, which would take the capacitor down to 20-21%. When it is finished with the observation and 
+    charging again, the other capacitor needs to become the active capacitor.  */
     {
         .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
@@ -340,7 +342,8 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #6 (unused) */
+    /* #6 This accounts for the worst case where an observation is commanded at 95%, which would take the capacitor down to 20-21%. When it is finished with the observation and 
+    charging again, the other capacitor needs to become the active capacitor.  */
     {
         .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
@@ -361,7 +364,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #7 (unused) */
+    /* #7 This will keep the capacitors at >30% charge from each other. */
     {
         .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
@@ -383,7 +386,7 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
                                }
     },
 
-    /* #8 (unused) */
+    /* #8 This will keep the capacitors at >30% charge from each other. */
     {
         .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
