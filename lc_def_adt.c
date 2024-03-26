@@ -224,13 +224,16 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .MaxPassiveEvents    = 0,                   // Always 
         .MaxPassFailEvents   = 0,                   // Always
         .MaxFailPassEvents   = 0,                   // Always
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_OBS_STOP_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION, // Always
         .EventID             = 1000,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventText           = { "Stop Obervation" },
+        .RPNEquation         = { 
+                                 2,
+                                 6,
+                                 5,
+                                 20,
                                  LC_RPN_EQUAL
                                }
     },
@@ -241,132 +244,163 @@ LC_ADTEntry_t LC_DefaultADT[LC_MAX_ACTIONPOINTS] =
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = WHE_CAP_A_DISCHARGE_CC,
+        .RTSId               = WHE_OBS_STOP_CC,
         .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1001,
-        .EventText           = { "Discharge Capacitor A" },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventText           = { "Stop Observation" },
+        .RPNEquation         = { 
+                                 2,
+                                 4,
+                                 7,
+                                 21,
                                  LC_RPN_EQUAL
                                }
     },
 
     /* #2 (unused) */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_A_DISCHARGE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1002,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventText           = { "Discharge Capacitor A" },
+        .RPNEquation         = { 
+                                 1,
+                                 4,
+                                 5,
+                                 12,
                                  LC_RPN_EQUAL
                                }
     },
 
     /* #3 (unused) */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_B_DISCHARGE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
         .EventID             = 1003,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventText           = { "Discharge Capacitor B" },
+        .RPNEquation         = { 
+                                 1,
+                                 4,
+                                 5,
+                                 13,
                                  LC_RPN_EQUAL
                                }
     },
 
     /* #4 (unused) */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_B_DISCHARGE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1004,
+        .EventText           = { "Discharge Capacitor B" },
+        .RPNEquation         = { 
+                                 1,
+                                 4,
+                                 5,
+                                 14,
+                                 15,
                                  LC_RPN_EQUAL
                                }
     },
 
     /* #5 (unused) */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_A_ACTIVE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1005,
+        .EventText           = { "Set Capacitor A to Active" },
+        .RPNEquation         = { 
+                                 1,
+                                 4,
+                                 5,
+                                 16,
+                                 19,
                                  LC_RPN_EQUAL
                                }
     },
 
     /* #6 (unused) */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_B_ACTIVE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1006,
+        .EventText           = { "Set Capacitor B to Active" },
+        .RPNEquation         = { 
+                                 1,
+                                 4,
+                                 5,
+                                 17,
+                                 18,
                                  LC_RPN_EQUAL
                                }
     },
 
     /* #7 (unused) */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_A_DISCHARGE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1007,
+        .EventText           = { "Discharge Capacitor A" },
+        .RPNEquation         = { 
+                                 1,
+                                 4,
+                                 5,
+                                 26,
+                                 25,
+                                 23,
                                  LC_RPN_EQUAL
                                }
     },
 
     /* #8 (unused) */
     {
-        .DefaultState        = LC_ACTION_NOT_USED,
+        .DefaultState        = LC_APSTATE_ACTIVE,
         .MaxPassiveEvents    = 0,
         .MaxPassFailEvents   = 0,
         .MaxFailPassEvents   = 0,
-        .RTSId               = 0,
-        .MaxFailsBeforeRTS   = 0,
+        .RTSId               = WHE_CAP_B_DISCHARGE_CC,
+        .MaxFailsBeforeRTS   = 1,
         .EventType           = CFE_EVS_INFORMATION,
-        .EventID             = 0,
-        .EventText           = { " " },
-        .RPNEquation         = { /* (WP_0) */
-                                 0,
+        .EventID             = 1008,
+        .EventText           = { "Discharge Capacitor B" },
+        .RPNEquation         = { 
+                                 1,
+                                 4,
+                                 5,
+                                 27,
+                                 24,
+                                 22,
                                  LC_RPN_EQUAL
                                }
     },
